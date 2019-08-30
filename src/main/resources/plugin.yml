@@ -1,0 +1,22 @@
+name: WarSimulation
+version: ${project.version}
+main: nl.jansneeuw.warsimulation.Warsimulation
+authors: [JanSneeuw]
+description: Minigames that simulates an all out minecraft war.
+commands:
+   Abort:
+      description: force a game to stop
+      permission: warsimulation.staff
+      usage: /abort
+   AddItemInt:
+      description: Add an item to the list of items.
+      permission: warsimulation.staff
+      usage: /additemint
+   SetDefaultKit:
+      description: Set the default kit for players.
+      permission: warsimulation.staff
+      usage: /setdefaultkit
+   SetLobbySpawn:
+      description: Set the lobby spawn.
+      permission: warsimulation.staff
+      usage: /setlobbyspawn

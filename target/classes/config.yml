@@ -1,0 +1,29 @@
+World-Name: NONE
+Lobby-Name: NONE
+Game-Start: 10
+Game-Minumum: 8
+Red-Spawn:
+   X: 0
+   Y: 100
+   Z: 0
+Blue-Spawn:
+   X: 100
+   Y: 100
+   Z: 100
+Lobby-Spawn:
+   X: 0
+   Y: 100
+   Z: 0
+FallBackServer: Lobby
+Game-Limit: 15
+scoreboard-title: '&l&cWar&eSimulation'
+Message-Prefix: '&7Test'
+default-kit-string: '00000000000000000000000000000000000000000000000000000000000000000000000000000000'
+#Message that's send to a player when he or she joins a team. %Team% changes for the team name.
+Join-Message: 'You joined team %TEAM%'
+#Message that's send to a player when he or she tries to join a team which the player already joined. %TEAM% changes to the team.
+Already-In-Team-Message: 'You are already in that team'
+#Message that's send to all players when a game is aborted. %PLAYER% changes to the name of the player that aborted the game.
+Game-Aborted-Message: 'The game was aborted by %PLAYER%.'
+#Message that's send to the players when the game ended and resulted in a draw due to the time limit.
+Game-Limit-Reached-Message: 'Game is over, no one won!'
