@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class Playerdata {
 
-    Plugin plugin = Bukkit.getPluginManager().getPlugin("Oorlogssimulatie");
+    Plugin plugin = Bukkit.getPluginManager().getPlugin("WarSimulation");
     String uuid = null;
     File playerfile = null;
     FileConfiguration playerdata = null;

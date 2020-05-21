@@ -19,7 +19,7 @@ Game-Limit: 15
 scoreboard-title: '&l&cWar&eSimulation'
 Message-Prefix: '&7Test'
 default-kit-string: '00000000000000000000000000000000000000000000000000000000000000000000000000000000'
-#Message that's send to a player when he or she joins a team. %Team% changes for the team name.
+#Message that's send to a player when he or she joins a team. %Team% changes to the team name.
 Join-Message: 'You joined team %TEAM%'
 #Message that's send to a player when he or she tries to join a team which the player already joined. %TEAM% changes to the team.
 Already-In-Team-Message: 'You are already in that team'

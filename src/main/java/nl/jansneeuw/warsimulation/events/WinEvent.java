@@ -51,18 +51,25 @@ public class WinEvent implements Listener {
         }
         plugin.getServer().setWhitelist(true);
 
-        if (plugin.getServer().unloadWorld(plugin.getConfig().getString("World-Name"), false)){
-            plugin.getLogger().info("Game map unloaded!");
-        }else{
-            plugin.getLogger().severe("Couldn't unload game map!");
-        }
+        BukkitTask unloadMap = new BukkitRunnable(){
+            @Override
+            public void run() {
+                if (plugin.getServer().unloadWorld(plugin.getConfig().getString("World-Name"), false)){
+                    plugin.getLogger().info("Game map unloaded!");
+                }else{
+                    plugin.getLogger().severe("Couldn't unload game map!");
+                }
 
-        plugin.getServer().createWorld(new WorldCreator(plugin.getConfig().getString("World-Name")));
+                plugin.getServer().createWorld(new WorldCreator(plugin.getConfig().getString("World-Name")));
 
-        plugin.getServer().setWhitelist(false);
+                plugin.getServer().setWhitelist(false);
 
-        GameUtils utils = new GameUtils(plugin);
-        utils.restartGame();
-        plugin.tasks.get("Game").cancel();
+                GameUtils utils = new GameUtils(plugin);
+                utils.restartGame();
+                plugin.tasks.get("Game").cancel();
+
+            }
+        }.runTaskLater(plugin, 160);
+        LobbyEvent.resetTimer();
     }
 }

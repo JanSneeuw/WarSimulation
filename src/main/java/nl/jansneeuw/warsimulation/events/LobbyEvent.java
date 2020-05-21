@@ -33,7 +33,7 @@ public class LobbyEvent implements Listener {
     }
 
     List<String> teamsArray = new ArrayList<>();
-    private int timer = 10;
+    public static int timer = 10;
     @EventHandler
     public void onLobbyJoin(LobbyJoinEvent event){
         if (!plugin.lobbyList.contains(event.getPlayer())){
@@ -192,5 +192,9 @@ public class LobbyEvent implements Listener {
     public void onLobbyLeave(LobbyLeaveEvent event){
         plugin.lobbyList.remove(event.getPlayer());
         plugin.gameList.remove(event.getPlayer());
+    }
+
+    public static void resetTimer(){
+        timer = 10;
     }
 }

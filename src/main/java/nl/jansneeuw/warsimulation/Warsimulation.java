@@ -57,6 +57,9 @@ public final class Warsimulation extends JavaPlugin {
         getCommand("Abort").setExecutor(new AbortGame());
 
         saveDefaultKitStacks();
+
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+
     }
 
     @Override
