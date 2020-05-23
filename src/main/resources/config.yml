@@ -27,3 +27,7 @@ Already-In-Team-Message: 'You are already in that team'
 Game-Aborted-Message: 'The game was aborted by %PLAYER%.'
 #Message that's send to the players when the game ended and resulted in a draw due to the time limit.
 Game-Limit-Reached-Message: 'Game is over, no one won!'
+#Set to true if you want the team to be balanced when players try to join a team.
+teamBalancing: true
+#Message to be sent to the player when a team is currently full.
+Team-Currently-Full-Message: 'Team %TEAM% is currently full.'

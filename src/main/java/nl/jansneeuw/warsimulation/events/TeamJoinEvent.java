@@ -2,6 +2,7 @@ package nl.jansneeuw.warsimulation.events;
 
 import nl.jansneeuw.warsimulation.Warsimulation;
 import nl.jansneeuw.warsimulation.scoreboards.LobbyBoard;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,6 +13,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
 
 public class TeamJoinEvent implements Listener {
     Warsimulation plugin;
@@ -32,16 +35,24 @@ public class TeamJoinEvent implements Listener {
                             if ((plugin.teamStringList.containsKey(player)) && plugin.teamStringList.get(player).equalsIgnoreCase("Red")) {
                                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Already-In-Team-Message").replace("%TEAM%", "rood")));
                             } else {
-                                plugin.teamStringList.put(player, "Red");
-                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Message-Prefix")) + plugin.getConfig().getString("Join-Message").replace("%TEAM%", "rood"));
+                                if (joinTeamAllowed("Red")){
+                                    plugin.teamStringList.put(player, "Red");
+                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Message-Prefix")) + plugin.getConfig().getString("Join-Message").replace("%TEAM%", "rood"));
+                                }else{
+                                    player.sendMessage(plugin.getConfig().getString("Team-Currently-Full-Message").replace("%TEAM%", "Red"));
+                                }
                             }
                         } else if (hand.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.WHITE + "" + ChatColor.BOLD + "Join Team Blauw") && hand.getData().getItemType() == Material.LAPIS_BLOCK) {
                             event.setCancelled(true);
                             if ((plugin.teamStringList.containsKey(player)) && plugin.teamStringList.get(player).equalsIgnoreCase("Blue")) {
                                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Already-In-Team-Message").replace("%TEAM%", "blauw")));
                             } else {
-                                plugin.teamStringList.put(player, "Blue");
-                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Message-Prefix")) + plugin.getConfig().getString("Join-Message").replace("%TEAM%", "blauw"));
+                                if (joinTeamAllowed("Blue")) {
+                                    plugin.teamStringList.put(player, "Blue");
+                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Message-Prefix")) + plugin.getConfig().getString("Join-Message").replace("%TEAM%", "blauw"));
+                                }else{
+                                    player.sendMessage(plugin.getConfig().getString("Team-Currently-Full-Message").replace("%TEAM%", "Blue"));
+                                }
                             }
                         }
                         if (plugin.teamStringList.containsKey(player)){
@@ -87,4 +98,23 @@ public class TeamJoinEvent implements Listener {
         }
     }
 
+
+    private boolean joinTeamAllowed(String team){
+        if (plugin.getConfig().getBoolean("teamBalancing")){
+            int teamInt = 0;
+            for (String teams : plugin.teamStringList.values()){
+                if (teams.equalsIgnoreCase(team)){
+                    teamInt += 1;
+
+                }
+            }
+            if (teamInt >= (Bukkit.getOnlinePlayers().size() / (double) 2)){
+                return false;
+            }else{
+                return true;
+            }
+        }else {
+            return true;
+        }
+    }
 }
